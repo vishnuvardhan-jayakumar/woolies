@@ -59,7 +59,12 @@ namespace Woolies.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
 
-            return context.Response.WriteAsync("Request could not be processed.");
+            var responseMessage = new
+            {
+                Message = "Request could not be processed."
+            };
+            
+            return context.Response.WriteAsync(JsonConvert.SerializeObject(responseMessage));
         }
     }
 }
